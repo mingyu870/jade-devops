@@ -1,0 +1,9 @@
+{
+  "name": "post-service",
+  "version": "1.0.0",
+  "main": "post.js",
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.5.0"
+  }
+}

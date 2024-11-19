@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  user-service:
+    image: python:3.12-slim  
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: /bin/bash -c "pip install -r requirements.txt && python user.py"  # 의존성 설치 후 실행
+    ports:
+      - "5001:5001"
+    networks:
+      - microservices-network
+
+  post-service:
+    image: python:3.12-slim
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: /bin/bash -c "pip install -r requirements.txt && python post.py"  # 의존성 설치 후 실행
+    ports:
+      - "5003:5003"
+    networks:
+      - microservices-network
+    depends_on:
+      - user-service
+
+  notification-service:
+    image: python:3.12-slim
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: /bin/bash -c "pip install -r requirements.txt && python notification.py"  # 의존성 설치 후 실행
+    ports:
+      - "5002:5002"
+    networks:
+      - microservices-network
+    depends_on:
+      - user-service
+      - post-service
+
+networks:
+  microservices-network:
+    driver: bridge

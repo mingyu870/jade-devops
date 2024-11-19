@@ -1,0 +1,33 @@
+services:
+  user-service:
+    build: ./user
+    container_name: user-service
+    ports:
+      - "3001:3001"
+    networks:
+      - microservices-network
+
+  post-service:
+    build: ./post
+    container_name: post-service
+    ports:
+      - "3002:3002"
+    networks:
+      - microservices-network
+    depends_on:
+      - user-service
+
+  notification-service:
+    build: ./notification
+    container_name: notification-service
+    ports:
+      - "3003:3003"
+    networks:
+      - microservices-network
+    depends_on:
+      - user-service
+      - post-service
+
+networks:
+  microservices-network:
+    driver: bridge

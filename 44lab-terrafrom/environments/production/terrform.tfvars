@@ -5,17 +5,17 @@ environment    = "lab"
 developer_name = "jade"
 
 # aws config
-aws_region = "seoul"
+aws_region = "ap-southeast-1"
 ## for running terraform
-aws_profile = "prod-44lab"
+aws_profile = "jade"
 ## route53
-origin_domain_name = "44lab"
+origin_domain_name = "labs4s.com"
 # CICD config
-slack = {
+/* slack = {
   workspace_id          = ""
   notify_channel_id     = ""
   notify_all_channel_id = ""
-}
+} */
 ## this config for test. If production set to false
 ## Target resource is s3 and ecr
 force_destroy = false

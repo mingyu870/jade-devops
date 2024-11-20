@@ -14,11 +14,11 @@ locals {
     exclude_subnet_azs = []
     ingress_rules = {
       office_wifi_http = {
-        description = "office wifi web"
-        from_port   = 80
-        to_port     = 80
-        protocol    = "tcp"
-        cidr_ipv4   = "0.0.0.0/32"
+        description    = "office wifi web"
+        from_port      = 80
+        to_port        = 80
+        protocol       = "tcp"
+        cidr_ipv4      = "0.0.0.0/32"
         # if you need
         referenced_security_group_id = null
         cidr_ipv6                    = null
@@ -38,9 +38,9 @@ locals {
 
   redis_instance = {
     #     node_type = "cache.m6g.large"
-    node_type               = "cache.t4g.micro"
-    engine_version          = "7.1.0"
-    port                    = 6379
+    node_type                  = "cache.t4g.micro"
+    engine_version             = "7.1.0"
+    port                       = 6379
     num_node_groups            = 1 
     replicas_per_node_group    = 0 
     # snapshot_retention_limit and snapshot_window have bug, if not working using cli

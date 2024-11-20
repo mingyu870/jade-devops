@@ -1,4 +1,4 @@
-/* ##############################
+##############################
 # RDS Parameter Group
 ##############################
 resource "aws_rds_cluster_parameter_group" "rds_cluster_parameter_group" {
@@ -159,4 +159,3 @@ resource "aws_security_group" "rds" {
     Name = "${var.full_proj_name}-${var.module_name}-rds-sg"
   }
 }
- */

@@ -1,4 +1,4 @@
-/* variable "project_name" {
+variable "project_name" {
   type        = string
   description = "project name for tagging"
 }
@@ -52,4 +52,3 @@ variable "vpc_id" {
   type        = string
   description = "vpc id"
 }
- */

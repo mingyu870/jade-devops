@@ -35,7 +35,7 @@ variable "redis" {
   description = "redis variables"
   default = {
     #     node_type = "cache.m6g.large"
-    node_type               = "cache.r7g.large"
+    node_type               = "cache.t4g.micro"
     engine_version          = "7.1.0"
     port                    = 6379
     num_node_groups         = 1

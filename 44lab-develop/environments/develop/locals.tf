@@ -1,11 +1,11 @@
 
 locals {
-/* ##############################
+##############################
 # RDS local set
 ##############################
   mysql_spec = {
     instance_type    = "db.t3.medium"
-  } */
+  }
 
 # EC2-1 spec setup
   bastion_spec = {
@@ -14,21 +14,21 @@ locals {
     exclude_subnet_azs = []
     ingress_rules = {
       office_wifi_http = {
-        description = "Dosan-daero 5f GPEX wifi 5g"
+        description = "office wifi web"
         from_port   = 80
         to_port     = 80
         protocol    = "tcp"
-        cidr_ipv4   = "61.78.96.20/32"
+        cidr_ipv4   = "0.0.0.0/32"
         # if you need
         referenced_security_group_id = null
         cidr_ipv6                    = null
       }
       office_wifi_ssh = {
-        description = "Dosan-daero 5f GPEX wifi 5g"
+        description = "office wifi ssh"
         from_port   = 22
         to_port     = 22
         protocol    = "tcp"
-        cidr_ipv4   = "61.78.96.20/32"
+        cidr_ipv4   = "0.0.0.0/32"
         # if you need
         referenced_security_group_id = null
         cidr_ipv6                    = null
@@ -38,7 +38,7 @@ locals {
 
   redis_instance = {
     #     node_type = "cache.m6g.large"
-    node_type               = "cache.r7g.large"
+    node_type               = "cache.t4g.micro"
     engine_version          = "7.1.0"
     port                    = 6379
     num_node_groups            = 1 

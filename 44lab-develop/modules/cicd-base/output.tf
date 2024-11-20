@@ -13,14 +13,6 @@ output "ecs_task_role_arn" {
   }
 }
 
-output "chatbot_slack_notify" {
-  value = awscc_chatbot_slack_channel_configuration.slack-notify
-}
-
-output "chatbot_slack_all_notify" {
-  value = awscc_chatbot_slack_channel_configuration.slack-all-notify
-}
-
 #############
 output "sns_topic_slack_notify" {
   value = aws_sns_topic.sns-topic
@@ -68,12 +60,4 @@ output "event_rule_name" {
 
 output "event_target_id" {
   value = aws_cloudwatch_event_target.target.id
-}
-
-output "resource_alarm_topic_arn" {
-  value = aws_sns_topic.resource_alarm_topic.arn
-}
-
-output "resource_alarm_topic_name" {
-  value = aws_sns_topic.resource_alarm_topic.name
 }

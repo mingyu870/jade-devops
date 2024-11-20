@@ -74,22 +74,6 @@ resource "aws_sns_topic_policy" "alerts_ci_slack_notifications_sns_topic_policy"
   policy = data.aws_iam_policy_document.topic-policy.json
 }
 
-
-resource "awscc_chatbot_slack_channel_configuration" "slack-notify" {
-  provider           = awscc.cc
-  configuration_name = "${var.full_proj_name}-slack-notify"
-  iam_role_arn       = aws_iam_role.chatbot_role.arn
-  slack_channel_id   = var.slack.notify_channel_id
-  slack_workspace_id = var.slack.workspace_id
-  guardrail_policies = [data.aws_iam_policy.ReadOnlyAccess.arn]
-  sns_topic_arns     = [aws_sns_topic.sns-topic.arn]
-  logging_level      = "INFO" //fixme <=== debuging ... will be delete
-  lifecycle {
-    // fixme manual will be delete when tf apply. If donot wanna manual delete use ignore changes
-    ignore_changes = [sns_topic_arns]
-  }
-}
-
 # sns topic all
 resource "aws_sns_topic" "sns-all-topic" {
   name = "${var.full_proj_name}-sns-all-topic"
@@ -121,22 +105,4 @@ resource "aws_sns_topic_policy" "alerts_ci_slack_notifications_all_sns_topic_pol
 // fixme delete start
 output "topic-all" {
   value = aws_sns_topic.sns-all-topic
-}
-
-
-// fixme delete end
-
-resource "awscc_chatbot_slack_channel_configuration" "slack-all-notify" {
-  provider           = awscc.cc
-  configuration_name = "${var.full_proj_name}-slack-notify-all"
-  iam_role_arn       = aws_iam_role.chatbot_role.arn
-  slack_channel_id   = var.slack.notify_all_channel_id
-  slack_workspace_id = var.slack.workspace_id
-  guardrail_policies = [data.aws_iam_policy.ReadOnlyAccess.arn]
-  sns_topic_arns     = [aws_sns_topic.sns-all-topic.arn]
-  logging_level      = "INFO" //fixme <=== debuging ... will be delete
-  lifecycle {
-    // fixme manual will be delete when tf apply. If donot wanna manual delete use ignore changes
-    ignore_changes = [sns_topic_arns]
-  }
 }

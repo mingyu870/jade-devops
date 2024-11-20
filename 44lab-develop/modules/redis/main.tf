@@ -41,7 +41,7 @@ resource "aws_security_group" "redis" {
 # rds - instance
 ##############################
 resource "aws_elasticache_replication_group" "redis_instance" {
-  replication_group_id       = "${var.full_proj_name}-${var.module_name}-redis-instance"
+  replication_group_id       = "rd-${var.full_proj_name}-${var.module_name}-redis-instance"
   description                = "${var.full_proj_name}-${var.module_name}-redis-instance"
   node_type                  = var.redis.node_type
   port                       = 6379

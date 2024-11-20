@@ -179,8 +179,6 @@ module "ec2_bastion" {
   exclude_subnet_azs      = local.bastion_spec.exclude_subnet_azs
   vpc_id                  = module.network.vpc.id
   public_subnet           = module.network.public_subnet
-  redis_security_group_id = module.redis.redis_sg.id
-  redis_port              = module.redis.redis.port
   project_name            = var.project_name
   env                     = var.environment
   full_proj_name          = local.full_proj_name
@@ -234,15 +232,6 @@ module "s3" {
   full_proj_name = local.full_proj_name
 }
 
-output "s3" {
-  value = {
-    service_storage = {
-      bucket_name   = module.s3.service_storage_bucket.bucket
-      bucket_domain = module.s3.service_storage_bucket.bucket_regional_domain_name
-    }
-  }
-}
-
 ##############################
 # CICD base
 ##############################
@@ -253,17 +242,8 @@ module "CICD" {
   providers = {
     awscc.cc = awscc.cc
   }
-
-  slack                   = var.slack
   project_name            = var.project_name
   env                     = var.environment
   full_proj_name          = local.full_proj_name
   force_destroy           = var.force_destroy
-  s3_service_bucket_arn   = module.s3.service_storage_bucket.arn
-  google_chat_hook_url    = var.google_chat_hook_url
-  google_chat_hook_url_2  = var.google_chat_hook_url_2
-}
-
-output "CICD_codestar_connection_status" {
-  value = module.CICD.codestar.connection_status
 }

@@ -1,0 +1,8 @@
+resource "aws_ecr_repository" "backend" {
+  name         = "${var.full_proj_name}-${var.module_name}"
+  force_delete = var.force_destroy
+
+  tags = {
+    Name = "${var.full_proj_name}-${var.full_proj_name}-ecr_repository"
+  }
+}

@@ -87,16 +87,3 @@ resource "aws_vpc_security_group_ingress_rule" "ingress" {
   cidr_ipv6                    = each.value.cidr_ipv6
   referenced_security_group_id = each.value.referenced_security_group_id
 }
-
-resource "aws_vpc_security_group_ingress_rule" "allow_to_redis_connect" {
-  security_group_id = var.redis_security_group_id
-
-  description                  = "Allow ec2 bastion"
-  from_port                    = var.redis_port
-  to_port                      = var.redis_port
-  ip_protocol                  = "tcp"
-  referenced_security_group_id = aws_security_group.ec2_sg.id
-  tags = {
-    Name = "Allow ec2 bastion"
-  }
-}

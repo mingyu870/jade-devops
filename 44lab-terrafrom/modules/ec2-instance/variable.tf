@@ -62,12 +62,3 @@ variable "ingress_rules" {
   description = "Set of ingress rules for the security group"
 }
 
-variable "redis_security_group_id" {
-  type        = string
-  description = "Allow redis connect from ec2 bastion"
-}
-
-variable "redis_port" {
-  type        = number
-  description = "redis port for allow RDS connect from ec2 bastion"
-}

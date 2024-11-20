@@ -1,15 +1,5 @@
 
 #############
-output "sns_topic_slack_notify" {
-  value = aws_sns_topic.sns-topic
-}
-
-output "sns_topic_slack_all_notify" {
-  value = aws_sns_topic.sns-all-topic
-}
-output "codepipeline_artifact_bucket" {
-  value = aws_s3_bucket.codepipeline_artifact_bucket
-}
 # Outputs
 output "topic_alarm" {
   value = aws_sns_topic.event_alarm_topic.arn

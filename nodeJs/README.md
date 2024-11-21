@@ -1,3 +1,6 @@
+# 프로젝트 디렉토리 구조
+
+<pre>
 DevOps/
 ├── nodeJs/
 │   ├── notification/
@@ -29,3 +32,4 @@ DevOps/
 └── .github/
     └── workflows/
         └── deploy.yml
+</pre>

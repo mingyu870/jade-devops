@@ -3,6 +3,15 @@
 <pre>
 DevOps/
 ├── nodeJs/
+│   ├── argocd/
+│   │   └── argocd.yaml
+│   ├── helm/
+│   │   ├── Chart.yaml
+│   │   └── values.yaml
+│   ├── templates/
+│   │   ├── deployment.yaml
+│   │   ├── ingress.yaml
+│   │   └── service.yaml
 │   ├── notification/
 │   │   ├── Dockerfile
 │   │   ├── package.json
@@ -16,19 +25,6 @@ DevOps/
 │   │   ├── package.json
 │   │   └── user.js
 │   └── docker-compose.yml
-│
-├── k8s/
-│   ├── user/
-│   │   ├── deployment.yaml
-│   │   └── service.yaml
-│   ├── post/
-│   │   ├── deployment.yaml
-│   │   └── service.yaml
-│   ├── notification/
-│   │   ├── deployment.yaml
-│   │   └── service.yaml
-│   └── ingress.yaml
-│
 └── .github/
     └── workflows/
         └── deploy.yml

@@ -1,0 +1,113 @@
+name: Deploy to Kubernetes with ArgoCD
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'nodeJs/post/**'
+      - 'nodeJs/user/**'
+      - 'nodeJs/notification/**'
+
+jobs:
+  deploy-post:
+    if: github.event.head_commit.modified && contains(github.event.head_commit.modified, 'nodeJs/post')
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Kubernetes
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'v1.27.0'
+
+    - name: Install Helm
+      uses: azure/setup-helm@v3
+      with:
+        version: 'v3.12.0'
+
+    - name: Lint Helm chart
+      run: helm lint helm/
+
+    - name: Package Helm chart
+      run: helm package helm/
+
+    - name: Deploy post service with ArgoCD
+      env:
+        ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
+        ARGOCD_USERNAME: ${{ secrets.ARGOCD_USERNAME }}
+        ARGOCD_PASSWORD: ${{ secrets.ARGOCD_PASSWORD }}
+      run: |
+        helm upgrade --install post-service helm/ \
+          --set postService.image=post-service:latest \
+          --set ingress.enabled=true \
+          --set ingress.hostname=post-service.local
+
+  deploy-user:
+    if: github.event.head_commit.modified && contains(github.event.head_commit.modified, 'nodeJs/user')
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Kubernetes
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'v1.27.0'
+
+    - name: Install Helm
+      uses: azure/setup-helm@v3
+      with:
+        version: 'v3.12.0'
+
+    - name: Lint Helm chart
+      run: helm lint helm/
+
+    - name: Package Helm chart
+      run: helm package helm/
+
+    - name: Deploy user service with ArgoCD
+      env:
+        ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
+        ARGOCD_USERNAME: ${{ secrets.ARGOCD_USERNAME }}
+        ARGOCD_PASSWORD: ${{ secrets.ARGOCD_PASSWORD }}
+      run: |
+        helm upgrade --install user-service helm/ \
+          --set userService.image=user-service:latest \
+          --set ingress.enabled=true \
+          --set ingress.hostname=user-service.local
+
+  deploy-notification:
+    if: github.event.head_commit.modified && contains(github.event.head_commit.modified, 'nodeJs/notification')
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Kubernetes
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'v1.27.0'
+
+    - name: Install Helm
+      uses: azure/setup-helm@v3
+      with:
+        version: 'v3.12.0'
+
+    - name: Lint Helm chart
+      run: helm lint helm/
+
+    - name: Package Helm chart
+      run: helm package helm/
+
+    - name: Deploy notification service with ArgoCD
+      env:
+        ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
+        ARGOCD_USERNAME: ${{ secrets.ARGOCD_USERNAME }}
+        ARGOCD_PASSWORD: ${{ secrets.ARGOCD_PASSWORD }}
+      run: |
+        helm upgrade --install notification-service helm/ \
+          --set notificationService.image=notification-service:latest \
+          --set ingress.enabled=true \
+          --set ingress.hostname=notification-service.local

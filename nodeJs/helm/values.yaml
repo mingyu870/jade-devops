@@ -1,0 +1,15 @@
+userService:
+  image: user-service:latest
+  port: 3001
+
+postService:
+  image: post-service:latest
+  port: 3002
+
+notificationService:
+  image: notification-service:latest
+  port: 3003
+
+ingress:
+  enabled: true
+  hostname: microservices.local

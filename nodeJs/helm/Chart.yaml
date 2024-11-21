@@ -1,0 +1,4 @@
+apiVersion: v2
+name: microservices-chart
+description: A Helm chart for deploying Node.js microservices
+version: 0.1.0

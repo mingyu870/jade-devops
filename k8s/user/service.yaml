@@ -7,6 +7,6 @@ spec:
     app: user
   ports:
     - protocol: TCP
-      port: 80 81       
+      port: 8081       
       targetPort: 3001 
   type: ClusterIP   

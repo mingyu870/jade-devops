@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/mingyu870/jade-devops.git'  # 사용자의 리포지토리
     targetRevision: main                                    # 배포할 브랜치
-    path: helm                                              # Helm 차트 경로
+    path: nodeJs/helm                                       # Helm 차트 경로
   destination:
     server: 'https://kubernetes.default.svc'               # Kubernetes 클러스터 주소
     namespace: default                                      # 배포 네임스페이스

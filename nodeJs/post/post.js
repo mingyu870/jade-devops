@@ -12,7 +12,7 @@ app.post('/notify', (req, res) => {
         .then(response => {
             const user = response.data;
             console.log(`Sending notification to ${user.email}: New post titled "${title}"`);
-            res.json({ message: "Notification sent" });
+            res.json({ message: "Notification sent!" });
         })
         .catch(err => {
             console.error('Error fetching user:', err.message);  // 에러 메시지 출력

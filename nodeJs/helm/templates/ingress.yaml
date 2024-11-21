@@ -12,21 +12,21 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ .Chart.Name }}-user-service
+                name: {{ .Chart.Name }}-{{ .Values.userservice.serviceName }}  # 서비스 이름 사용
                 port:
-                  number: {{ .Values.userService.port }}
+                  number: {{ .Values.userservice.port }}
           - path: /post
             pathType: Prefix
             backend:
               service:
-                name: {{ .Chart.Name }}-post-service
+                name: {{ .Chart.Name }}-{{ .Values.postservice.serviceName }}
                 port:
-                  number: {{ .Values.postService.port }}
+                  number: {{ .Values.postservice.port }}
           - path: /notification
             pathType: Prefix
             backend:
               service:
-                name: {{ .Chart.Name }}-notification-service
+                name: {{ .Chart.Name }}-{{ .Values.notificationservice.serviceName }}
                 port:
-                  number: {{ .Values.notificationService.port }}
+                  number: {{ .Values.notificationservice.port }}
 {{- end }}

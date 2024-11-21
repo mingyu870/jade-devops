@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-{{ .Values.userservice.serviceName }}  # 서비스 이름을 사용
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}-{{ .Values.userservice.serviceName }}  # 라벨 값 수정
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}-{{ .Values.userservice.serviceName }}  # 라벨 값 수정
+    spec:
+      containers:
+        - name: {{ .Values.userservice.serviceName }}
+          image: {{ .Values.userservice.image }}
+          ports:
+            - containerPort: {{ .Values.userservice.port }}

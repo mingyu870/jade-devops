@@ -110,8 +110,10 @@ override.tf.json
 *_override.tf.json
 output.tf
 *_output.tf
+*_output.tf.json
 variable.tf
 *_variable.tf
+*_variable.tf.json
 
 # Include override files you do wish to add to version control using negated pattern
 # !example_override.tf

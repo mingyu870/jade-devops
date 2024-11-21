@@ -12,7 +12,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ .Chart.Name }}-{{ .Values.userservice.serviceName }}  # 서비스 이름 사용
+                name: {{ .Chart.Name }}-{{ .Values.userservice.serviceName }}
                 port:
                   number: {{ .Values.userservice.port }}
           - path: /post

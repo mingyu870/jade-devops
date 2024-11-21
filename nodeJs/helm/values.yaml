@@ -1,16 +1,16 @@
 userservice:
   serviceName: user-service
-  image: user-service:latest
+  image: nodejs-user-service:latest
   port: 3001
 
 postservice:
   serviceName: post-service
-  image: post-service:latest
+  image: nodejs-post-service:latest
   port: 3002
 
 notificationservice:
   serviceName: notification-service
-  image: notification-service:latest
+  image: nodejs-notification-service:latest
   port: 3003
 
 ingress:

@@ -1,19 +1,63 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-{{ .Values.userservice.serviceName }}  # 서비스 이름을 사용
+  name: {{ .Chart.Name }}-{{ .Values.userservice.serviceName }}  # userService에 해당하는 Deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}-{{ .Values.userservice.serviceName }}  # 라벨 값 수정
+      app: {{ .Chart.Name }}-{{ .Values.userservice.serviceName }}
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}-{{ .Values.userservice.serviceName }}  # 라벨 값 수정
+        app: {{ .Chart.Name }}-{{ .Values.userservice.serviceName }}
     spec:
       containers:
         - name: {{ .Values.userservice.serviceName }}
-          image: {{ .Values.userservice.image }}
+          image: nodejs-user-service:latest
           ports:
             - containerPort: {{ .Values.userservice.port }}
+
+# postService에 해당하는 Deployment 추가
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-{{ .Values.postservice.serviceName }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}-{{ .Values.postservice.serviceName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}-{{ .Values.postservice.serviceName }}
+    spec:
+      containers:
+        - name: {{ .Values.postservice.serviceName }}
+          image: nodejs-post-service:latest
+          ports:
+            - containerPort: {{ .Values.postservice.port }}
+
+# notificationService에 해당하는 Deployment 추가
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-{{ .Values.notificationservice.serviceName }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}-{{ .Values.notificationservice.serviceName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}-{{ .Values.notificationservice.serviceName }}
+    spec:
+      containers:
+        - name: {{ .Values.notificationservice.serviceName }}
+          image: nodejs-notification-service:latest
+          ports:
+            - containerPort: {{ .Values.notificationservice.port }}

@@ -22,7 +22,7 @@ app.post('/users', (req, res) => {
 app.get('/users', (req, res) => {
     db.all("SELECT * FROM users", (err, rows) => {
         if (err) {
-            return res.status(500).json({ message: "Error fetching users" });
+            return res.status(500).json({ message: "Error fetching users!" });
         }
         res.json(rows);
     });

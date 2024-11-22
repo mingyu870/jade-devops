@@ -2,16 +2,19 @@ userservice:
   serviceName: user-service
   image: nodejs-user-service:latest
   port: 3001
+  imagePullPolicy: Never
 
 postservice:
   serviceName: post-service
   image: nodejs-post-service:latest
   port: 3002
+  imagePullPolicy: Never
 
 notificationservice:
   serviceName: notification-service
   image: nodejs-notification-service:latest
   port: 3003
+  imagePullPolicy: Never
 
 ingress:
   enabled: true

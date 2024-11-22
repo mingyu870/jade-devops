@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: {{ .Values.userservice.serviceName }}
-          image: nodejs-user-service:latest
+          image: {{ .Values.userservice.image }}
+          imagePullPolicy: {{ .Values.userservice.imagePullPolicy }}
           ports:
             - containerPort: {{ .Values.userservice.port }}
 
@@ -36,7 +37,8 @@ spec:
     spec:
       containers:
         - name: {{ .Values.postservice.serviceName }}
-          image: nodejs-post-service:latest
+          image: {{ .Values.postservice.image }}
+          imagePullPolicy: {{ .Values.postservice.imagePullPolicy }}
           ports:
             - containerPort: {{ .Values.postservice.port }}
 
@@ -58,6 +60,7 @@ spec:
     spec:
       containers:
         - name: {{ .Values.notificationservice.serviceName }}
-          image: nodejs-notification-service:latest
+          image: {{ .Values.notificationservice.image }}
+          imagePullPolicy: {{ .Values.notificationservice.imagePullPolicy }}
           ports:
             - containerPort: {{ .Values.notificationservice.port }}

@@ -8,21 +8,28 @@ spec:
     - host: {{ .Values.ingress.hostname }}
       http:
         paths:
-          - path: /user
+          - path: /users
             pathType: Prefix
             backend:
               service:
                 name: {{ .Chart.Name }}-{{ .Values.userservice.serviceName }}
                 port:
                   number: {{ .Values.userservice.port }}
-          - path: /post
+          - path: /post/notify
             pathType: Prefix
             backend:
               service:
                 name: {{ .Chart.Name }}-{{ .Values.postservice.serviceName }}
                 port:
                   number: {{ .Values.postservice.port }}
-          - path: /notification
+          - path: /notification/login
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Chart.Name }}-{{ .Values.notificationservice.serviceName }}
+                port:
+                  number: {{ .Values.notificationservice.port }}
+          - path: /notification/protected
             pathType: Prefix
             backend:
               service:

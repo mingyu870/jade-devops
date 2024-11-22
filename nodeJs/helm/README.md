@@ -1,15 +1,26 @@
-# User Test
-curl -X POST http://microservices.local/user -H "Content-Type: application/json" -d '{"name": "John", "email": "john@example.com"}'
-curl http://microservices.local/user/users
-
-# Post Test
-curl -X POST http://microservices.local/post/notify -H "Content-Type: application/json" -d '{"userId": 1, "title": "Test Post", "content": "This is a test."}'
-
-# Notification Test
-curl -X POST http://microservices.local/notification/login -H "Content-Type: application/json" -d '{"username": "admin", "password": "password"}'
-curl -X GET http://microservices.local/notification/protected -H "Authorization: Bearer <TOKEN>"
-
-
 # local Test
-curl -X POST http://localhost:8081/users -H "Content-Type: application/json" -d '{"name": "John", "email": "john@example.com"}'
+curl -X POST http://localhost:3001/users \
+    -H "Content-Type: application/json" \
+    -d '{"name": "John", "email": "john@example.com"}'
 
+curl -X POST http://localhost:3002/notify \
+    -H "Content-Type: application/json" \
+    -d '{"userId": 1, "title": "New Post Notification"}'
+
+curl -X POST http://localhost:3003/login \
+    -H "Content-Type: application/json" \
+    -d '{"username": "admin", "password": "password"}'
+
+
+# cluster Test
+curl -X POST http://user-service:3001/users \
+    -H "Content-Type: application/json" \
+    -d '{"name": "John", "email": "john@example.com"}'
+
+curl -X POST http://post-service:3002/notify \
+    -H "Content-Type: application/json" \
+    -d '{"userId": 1, "title": "Test Post", "content": "Hello from cluster!"}'
+
+curl -X POST http://notification-service:3003/login \
+    -H "Content-Type: application/json" \
+    -d '{"username": "admin", "password": "password"}'

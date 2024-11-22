@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-{{ .Values.userservice.serviceName }}  # userService에 해당하는 Deployment
+  name: {{ .Values.userservice.serviceName }}  # userService에 해당하는 Deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}-{{ .Values.userservice.serviceName }}
+      app: {{ .Values.userservice.serviceName }}
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}-{{ .Values.userservice.serviceName }}
+        app: {{ .Values.userservice.serviceName }}
     spec:
       containers:
         - name: {{ .Values.userservice.serviceName }}
@@ -24,16 +24,16 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-{{ .Values.postservice.serviceName }}
+  name: {{ .Values.postservice.serviceName }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}-{{ .Values.postservice.serviceName }}
+      app: {{ .Values.postservice.serviceName }}
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}-{{ .Values.postservice.serviceName }}
+        app: {{ .Values.postservice.serviceName }}
     spec:
       containers:
         - name: {{ .Values.postservice.serviceName }}
@@ -47,16 +47,16 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-{{ .Values.notificationservice.serviceName }}
+  name: {{ .Values.notificationservice.serviceName }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}-{{ .Values.notificationservice.serviceName }}
+      app: {{ .Values.notificationservice.serviceName }}
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}-{{ .Values.notificationservice.serviceName }}
+        app: {{ .Values.notificationservice.serviceName }}
     spec:
       containers:
         - name: {{ .Values.notificationservice.serviceName }}

@@ -26,10 +26,11 @@ jobs:
         eval $(minikube docker-env)
 
     # 3. Docker 이미지 빌드 (Minikube 환경에서)
-    - name: Build Docker Image for Minikube
+    - name: Build Docker Image in Minikube
       run: |
-        eval $(minikube docker-env)
-        docker build -t user-service:latest -f nodeJs/user/Dockerfile .
+        eval $(minikube docker-env)  
+        docker build -t nodejs-user-service:${{ github.run_number }} -f nodeJs/user/Dockerfile .
+  
 
     # 4. kubectl 설치
     - name: Install kubectl
@@ -38,12 +39,12 @@ jobs:
         version: 'v1.27.0'
 
     # 5. Helm 차트를 사용하여 배포
-    - name: Deploy using Helm
+    - name: Deploy user service to Minikube
       run: |
-        helm upgrade --install user-service nodeJs/helm \
-          --set image.repository=user-service \
-          --set image.tag=latest \
+        helm upgrade --install user-service ./helm \
+          --set userservice.image=nodejs-user-service:${{ github.run_number }} \
           --set ingress.enabled=true
+  
 
 
     # 6. Minikube 서비스 URL 확인

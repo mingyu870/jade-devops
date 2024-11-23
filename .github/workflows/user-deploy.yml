@@ -41,7 +41,7 @@ jobs:
     # 5. Helm 차트를 사용하여 배포
     - name: Deploy user service to Minikube
       run: |
-        helm upgrade --install user-service ./helm \
+        helm upgrade --install user-service ./nodeJs/helm \
           --set userservice.image=nodejs-user-service:${{ github.run_number }} \
           --set ingress.enabled=true
   

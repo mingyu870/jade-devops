@@ -15,18 +15,18 @@ spec:
               service:
                 name: user-service
                 port:
-                  number: 8081
+                  number: 3001
           - path: /post
             pathType: Prefix
             backend:
               service:
                 name: post-service
                 port:
-                  number: 8082
+                  number: 3002
           - path: /notification
             pathType: Prefix
             backend:
               service:
                 name: notification-service
                 port:
-                  number: 8083
+                  number: 3003

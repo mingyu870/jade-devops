@@ -1,0 +1,53 @@
+name: Deploy user Service to Minikube
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'nodeJs/user/**'
+
+jobs:
+  deploy-user-service:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. GitHub 코드 체크아웃
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # 2. Minikube 설치 및 시작
+    - name: Install and Start Minikube
+      run: |
+        sudo apt-get update && sudo apt-get install -y conntrack
+        curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+        sudo install minikube-linux-amd64 /usr/local/bin/minikube
+        minikube start --driver=docker
+        eval $(minikube docker-env)
+
+    # 3. Docker 이미지 빌드 (Minikube 환경에서)
+    - name: Build Docker Image in Minikube
+      run: |
+        eval $(minikube docker-env)  
+        docker build -t nodejs-user-service:${{ github.run_number }} -f nodeJs/user/Dockerfile .
+  
+
+    # 4. kubectl 설치
+    - name: Install kubectl
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'v1.27.0'
+
+    # 5. Helm 차트를 사용하여 배포
+    - name: Deploy user service to Minikube
+      run: |
+        helm upgrade --install user-service ./nodeJs/helm \
+          --set userservice.image=nodejs-user-service:${{ github.run_number }} \
+          --set ingress.enabled=true
+  
+
+
+    # 6. Minikube 서비스 URL 확인
+    - name: Get Minikube Service URL
+      run: |
+        minikube service list

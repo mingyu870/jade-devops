@@ -7,6 +7,6 @@ spec:
     app: notification
   ports:
     - protocol: TCP
-      port: 8083
+      port: 3003
       targetPort: 3003
   type: ClusterIP

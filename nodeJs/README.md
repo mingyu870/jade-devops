@@ -6,12 +6,12 @@ DevOps/
 │   ├── argocd/
 │   │   └── argocd.yaml
 │   ├── helm/
+│   │   ├── templates/
+│   │   │   ├── deployment.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   └── service.yaml
 │   │   ├── Chart.yaml
 │   │   └── values.yaml
-│   ├── templates/
-│   │   ├── deployment.yaml
-│   │   ├── ingress.yaml
-│   │   └── service.yaml
 │   ├── notification/
 │   │   ├── Dockerfile
 │   │   ├── package.json
@@ -27,6 +27,8 @@ DevOps/
 │   └── docker-compose.yml
 └── .github/
     └── workflows/
-        └── deploy.yml
+        ├── notification-deploy.yaml
+        ├── post-deploy.yaml
+        └── user-deploy.yaml
 </pre>
 
